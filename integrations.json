@@ -20,7 +20,8 @@
       "plugin": "github.app-token",
       "paths": [
         ".github/workflows/hourly-board.yml",
-        "pubkit.json"
+        "pubkit.json",
+        "push-secrets.sh"
       ],
       "mode": "required"
     },
