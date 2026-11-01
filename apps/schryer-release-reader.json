@@ -1,0 +1,22 @@
+{
+  "name": "schryer-release-reader",
+  "url": "https://release.schryer.eu",
+  "description": "Reads schryer's release state and grades its repositories for release.schryer.eu. It can only read.",
+  "public": false,
+  "default_permissions": {
+    "actions": "read",
+    "administration": "read",
+    "contents": "read",
+    "issues": "read",
+    "metadata": "read",
+    "pull_requests": "read",
+    "secret_scanning_alerts": "read",
+    "security_events": "read",
+    "vulnerability_alerts": "read"
+  },
+  "pubkit": {
+    "user": "schryer",
+    "bitwarden_project": "e7f3fc61-a907-4de7-ac4a-b4e200b4c894",
+    "secret_prefix": "schryer-release-reader"
+  }
+}

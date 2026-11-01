@@ -1,0 +1,17 @@
+{
+  "name": "schryer-release-state-writer",
+  "url": "https://release.schryer.eu",
+  "description": "Opens pull requests on schryer/release-state for release.schryer.eu.",
+  "public": false,
+  "default_permissions": {
+    "actions": "write",
+    "contents": "write",
+    "metadata": "read",
+    "pull_requests": "write"
+  },
+  "pubkit": {
+    "user": "schryer",
+    "bitwarden_project": "e7f3fc61-a907-4de7-ac4a-b4e200b4c894",
+    "secret_prefix": "schryer-release-state-writer"
+  }
+}

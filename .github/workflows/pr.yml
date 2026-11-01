@@ -1,0 +1,41 @@
+# Written by `pubkit sync` from the ci block of pubkit.json. Do not edit:
+# change pubkit.json and run `pubkit sync`.
+name: pr
+
+on:
+  pull_request:
+  merge_group:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: ci
+    uses: Sustenaut/pubkit/.github/workflows/job-service-checks.yml@2c986f9ce17ac43e22b951a9da209c592475bb05 # v0.25.0
+    with: {"shellcheck": "with-secrets push-secrets.sh register-client.sh"}
+
+  tests:
+    name: ci
+    uses: Sustenaut/pubkit/.github/workflows/job-service-tests.yml@2c986f9ce17ac43e22b951a9da209c592475bb05 # v0.25.0
+    with: {"setup": "make venv", "test": "make functional"}
+
+  sonar:
+    name: ci
+    needs: [tests]
+    uses: Sustenaut/pubkit/.github/workflows/job-sonar.yml@2c986f9ce17ac43e22b951a9da209c592475bb05 # v0.25.0
+    with: {"reports": "sonar.python.coverage.reportPaths=*.xml sonar.javascript.lcov.reportPaths=lcov.info"}
+    secrets: { SONAR_TOKEN: '${{ secrets.SONAR_TOKEN }}' }
+
+  # The one check a ruleset requires: it passes only when every job
+  # above succeeded. None of them is ever skipped for not being asked for.
+  passed:
+    name: ci / passed
+    if: always()
+    needs: [checks, tests, sonar]
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "$RESULTS"
+          echo "$RESULTS" | jq -e 'all(.[]; .result == "success")' > /dev/null
+        env: { RESULTS: '${{ toJSON(needs) }}' }

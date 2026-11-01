@@ -1,0 +1,31 @@
+{
+  "kind": "service",
+  "ci": {
+    "with": {
+      "setup": "make venv",
+      "test": "make functional",
+      "shellcheck": "with-secrets push-secrets.sh register-client.sh"
+    }
+  },
+  "protect": {
+    "checks": [
+      "ci / passed",
+      "integrations / scan"
+    ],
+    "tags": false
+  },
+  "github_app": {
+    "id": {
+      "from": "schryer-release-reader-app-id",
+      "to": "RELEASE_READER_APP_ID"
+    },
+    "installation_id": {
+      "from": "schryer-release-reader-installation-id",
+      "to": "RELEASE_READER_APP_INSTALLATION_ID"
+    },
+    "key": {
+      "from": "schryer-release-reader-app-key",
+      "to": "RELEASE_READER_APP_KEY"
+    }
+  }
+}
