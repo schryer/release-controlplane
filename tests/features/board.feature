@@ -8,3 +8,8 @@ Feature: The hourly board stays quiet, and keeps its board with pubkit
     And its token comes from the reader app
     And it may ask for an OpenID Connect token
     And it keeps the board in the tenant "release-schryer"
+
+  Scenario: The nightly reads schryer's state, and sends no Slack message
+    When I read the nightly workflow
+    Then it asks pubkit what schryer's state governs
+    And it names the nightly app and no notification secret
