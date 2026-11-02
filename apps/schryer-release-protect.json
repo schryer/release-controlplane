@@ -1,0 +1,16 @@
+{
+  "name": "schryer-release-protect",
+  "url": "https://release.schryer.eu",
+  "description": "Applies rulesets and secret scanning settings to schryer's repositories from schryer/release-state.",
+  "public": false,
+  "default_permissions": {
+    "administration": "write",
+    "contents": "read",
+    "metadata": "read"
+  },
+  "pubkit": {
+    "user": "schryer",
+    "bitwarden_project": "e7f3fc61-a907-4de7-ac4a-b4e200b4c894",
+    "secret_prefix": "schryer-release-protect"
+  }
+}
