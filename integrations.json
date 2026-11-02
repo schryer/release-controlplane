@@ -19,6 +19,7 @@
       "plugin": "github.app-token",
       "paths": [
         ".github/workflows/hourly-board.yml",
+        ".github/workflows/nightly.yml",
         "pubkit.json",
         "push-secrets.sh"
       ],
@@ -27,7 +28,8 @@
     {
       "plugin": "github.repo-ops",
       "paths": [
-        ".github/workflows/hourly-board.yml"
+        ".github/workflows/hourly-board.yml",
+        ".github/workflows/nightly.yml"
       ],
       "mode": "required"
     },

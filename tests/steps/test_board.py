@@ -38,3 +38,21 @@ def oidc(workflow):
 def keeps(workflow, tenant):
     assert "pubkit state --repos-for board state.json > repos.json" in workflow
     assert f"pubkit board-publish --url https://storage.sustenaut.eu --tenant {tenant}" in workflow
+
+
+@when("I read the nightly workflow", target_fixture="nightly")
+def read_nightly():
+    return (ROOT / ".github/workflows/nightly.yml").read_text()
+
+
+@then("it asks pubkit what schryer's state governs")
+def governs(nightly):
+    assert "repos/schryer/release-state/contents/state.json" in nightly
+    assert "pubkit state --repos-for govern state.json" in nightly
+
+
+@then("it names the nightly app and no notification secret")
+def no_notify(nightly):
+    assert "app-id: '${{ vars.NIGHTLY_APP_ID }}'" in nightly
+    assert "app-key: '${{ secrets.NIGHTLY_APP_KEY }}'" in nightly
+    assert "notify-token" not in nightly and "SLACK" not in nightly
