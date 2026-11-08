@@ -12,7 +12,7 @@ permissions:
 jobs:
   checks:
     name: ci
-    uses: Sustenaut/pubkit/.github/workflows/job-service-checks.yml@d634bd9ba97c6933561e9e7d1ceff5b975e8f22e # v0.28.0
+    uses: Sustenaut/pubkit/.github/workflows/job-service-checks.yml@0e5477594d4ce20e411721c86d40a6547f026db9 # v0.29.0
     with: {"shellcheck": "with-secrets push-secrets.sh register-client.sh"}
 
   tests:
