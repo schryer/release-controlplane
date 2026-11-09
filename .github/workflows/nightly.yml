@@ -1,4 +1,4 @@
-# Every night: pubkit's nightly on what schryer's state.json governs.
+# Every night: pubfleet's nightly on what schryer's state.json governs.
 # It sends no Slack message: pull requests and failed runs reach you through GitHub.
 name: nightly
 
@@ -30,14 +30,14 @@ jobs:
       - id: plan
         run: |
           gh api -H 'Accept: application/vnd.github.raw+json' repos/schryer/release-state/contents/state.json > state.json
-          echo "repos=$(pubkit state --repos-for govern state.json)" >> "$GITHUB_OUTPUT"
+          echo "repos=$(pubfleet state --repos-for govern state.json)" >> "$GITHUB_OUTPUT"
         env:
           GH_TOKEN: '${{ steps.app.outputs.token }}'
 
   update:
     needs: plan
     if: needs.plan.outputs.repos != '{"repositories":[]}'
-    uses: Sustenaut/pubkit/.github/workflows/nightly.yml@d634bd9ba97c6933561e9e7d1ceff5b975e8f22e # v0.28.0
+    uses: Sustenaut/pubfleet/.github/workflows/nightly.yml@80f051890749283c9f5bfc33f328e013be26c05e # v0.1.0
     with: { repos: '${{ needs.plan.outputs.repos }}' }
     secrets:
       app-id: '${{ vars.NIGHTLY_APP_ID }}'
