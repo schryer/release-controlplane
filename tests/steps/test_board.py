@@ -16,9 +16,9 @@ def read_workflow():
     return (ROOT / ".github/workflows/hourly-board.yml").read_text()
 
 
-@then("it sends pubkit board's output nowhere, and uploads no artifact")
+@then("it sends pubfleet board's output nowhere, and uploads no artifact")
 def quiet_workflow(workflow):
-    assert "pubkit board --out site --repos repos.json > /dev/null" in workflow
+    assert "pubfleet board --out site --repos repos.json > /dev/null" in workflow
     assert "upload-artifact" not in workflow and "STEP_SUMMARY" not in workflow
 
 
@@ -36,8 +36,8 @@ def oidc(workflow):
 
 @then(parsers.parse('it keeps the board in the tenant "{tenant}"'))
 def keeps(workflow, tenant):
-    assert "pubkit state --repos-for board state.json > repos.json" in workflow
-    assert f"pubkit board-publish --url https://storage.sustenaut.eu --tenant {tenant}" in workflow
+    assert "pubfleet state --repos-for board state.json > repos.json" in workflow
+    assert f"pubfleet board-publish --url https://storage.sustenaut.eu --tenant {tenant}" in workflow
 
 
 @when("I read the nightly workflow", target_fixture="nightly")
@@ -48,7 +48,7 @@ def read_nightly():
 @then("it asks pubkit what schryer's state governs")
 def governs(nightly):
     assert "repos/schryer/release-state/contents/state.json" in nightly
-    assert "pubkit state --repos-for govern state.json" in nightly
+    assert "pubfleet state --repos-for govern state.json" in nightly
 
 
 @then("it names the nightly app and no notification secret")
