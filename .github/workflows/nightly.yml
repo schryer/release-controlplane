@@ -37,7 +37,7 @@ jobs:
   update:
     needs: plan
     if: needs.plan.outputs.repos != '{"repositories":[]}'
-    uses: Sustenaut/pubfleet/.github/workflows/nightly.yml@80f051890749283c9f5bfc33f328e013be26c05e # v0.1.0
+    uses: Sustenaut/pubfleet/.github/workflows/nightly.yml@45799e0bac89dbd7747c99857631caef7dfb4e89 # v0.1.3
     with: { repos: '${{ needs.plan.outputs.repos }}' }
     secrets:
       app-id: '${{ vars.NIGHTLY_APP_ID }}'
